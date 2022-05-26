@@ -46,7 +46,7 @@ while True:
         s.close()
         exit(0)
     elif "get" in receive_data:
-        if os.path.exists(get_filename(receive_data, 'get')):
+        if os.path.exists(get_filename(receive_data, 'get')) and get_filename(receive_data, 'get') != "Server.py":
             print(f"Sending {get_filename(receive_data,'get')}")
             send_file(get_filename(receive_data, "get"))
         else:
