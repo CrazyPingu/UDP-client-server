@@ -1,5 +1,5 @@
-Client/*
+Client/
 !Client/Client.py
 
-Server/*
+Server/
 !Server/Server.py
