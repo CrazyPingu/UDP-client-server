@@ -53,7 +53,7 @@ port = 9999
 buf = 1024
 addr = (host,port)
 s = socket(AF_INET,SOCK_DGRAM)
-print("Type help to check the command")
+print("Type help to check the commands")
 
 while True:
     s.settimeout(None)
