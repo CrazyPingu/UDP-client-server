@@ -54,6 +54,7 @@ buf = 1024
 addr = (host, port)
 s = socket(AF_INET,SOCK_DGRAM)
 s.bind(addr)
+print("Opened server")
 
 while True:
     s.settimeout(None)
