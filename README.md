@@ -2,14 +2,15 @@
 
 Basic client - server connection UDP based
 
-The client can use those command:
+The client can use these commands:
 
-*  list : the server will send a list of the file that he can send
+*  list : the server will send a list of the files that he can send
 
-*  get <strong>filename</strong> : the server will send the client the file required
+*  help : the client will output the list of all avalible commands
 
-*  put <strong>filename</strong> : the client will send to the server the file indicated
+*  close : the client will close itself
 
-* help : the client will output the list of all avalible commands
+*  get <strong>filename</strong> : the server will send the required file to the client
 
-* close : the client will close itself
+*  put <strong>filename</strong> : the client will send the specified file to the server 
+
