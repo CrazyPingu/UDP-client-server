@@ -1,6 +1,7 @@
 from socket import *
 import os
 from sys import *
+import threading
 
 def send_file(message):
     s.sendto(str.encode(message),addr)
@@ -30,22 +31,8 @@ def receive_file():
 def get_filename(receive_data:str, avoid):
     return receive_data.split()[0] if receive_data.split()[0] != avoid else receive_data.split()[1]
 
-host = 'localhost'
-port = 9999
-buf = 1024
-addr = (host, port)
-s = socket(AF_INET,SOCK_DGRAM)
-s.bind(addr)
-
-while True:
-    s.settimeout(None)
-    data,addr = s.recvfrom(buf)
-    receive_data = data.decode('utf-8')
-    if receive_data == "close":
-        print("Closing the server")
-        s.close()
-        exit(0)
-    elif "get" in receive_data:
+def command_to_do():
+    if "get" in receive_data:
         if os.path.exists(get_filename(receive_data, 'get')) and get_filename(receive_data, 'get') != "Server.py":
             print(f"Sending {get_filename(receive_data,'get')}")
             send_file(get_filename(receive_data, "get"))
@@ -61,6 +48,18 @@ while True:
         for file_name in list_to_send:
             s.sendto(file_name.encode(), addr)
 
+host = 'localhost'
+port = 9999
+buf = 1024
+addr = (host, port)
+s = socket(AF_INET,SOCK_DGRAM)
+s.bind(addr)
 
-
-
+while True:
+    s.settimeout(None)
+    data,addr = s.recvfrom(buf)
+    receive_data = data.decode('utf-8')
+    thread = threading.Thread(target=command_to_do)
+    thread.start()
+    thread.join()
+    
