@@ -33,14 +33,12 @@ def get_filename(receive_data:str):
 def obtain_list():
     data, address = s.recvfrom(buf)
     list_of_file = ""
-    try:
-        while True:
-            list_of_file += data.decode() + " | "
-            s.settimeout(4)    
+    if data.decode() == "0":
+        print("The server does not have any file")
+    else:
+        for i in range(int(data)):
             data, address = s.recvfrom(buf)
-    except timeout:
-        pass
-    finally:
+            list_of_file += data.decode() + " | "
         print (list_of_file[:len(list_of_file)-2])
 
 def print_command():

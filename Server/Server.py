@@ -47,8 +47,10 @@ def command_to_do():
         list_to_send = os.listdir()
         list_to_send.remove('Server.py')
         print("Sending list of the file")
+        s.sendto(str.encode(str(len(list_to_send))),addr)
         for file_name in list_to_send:
             s.sendto(file_name.encode(), addr)
+
 
 host = 'localhost'
 port = 9999
