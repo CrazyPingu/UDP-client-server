@@ -1,0 +1,14 @@
+@startuml udp
+!theme plain
+== Initialization ==
+Server -> Client : bind(port)
+== Repetition ==
+Client -> Server : get Filename
+Server -> Client : put Filename
+== Repetition ==
+Client -> Server : put Filename
+Server -> Client : get Filename
+== Repetition ==
+Client -> Server : list
+Server -> Client : send list
+@enduml
