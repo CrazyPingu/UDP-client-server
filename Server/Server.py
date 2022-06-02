@@ -7,7 +7,7 @@ import threading
 
 def send_file(message):
     s.sendto(str.encode(message),addr)
-    f=open(str.encode(message),"rb")
+    f=open(message,"rb")
     data = f.read(buf)
     while (data):
         if(s.sendto(data,addr)):
@@ -16,13 +16,12 @@ def send_file(message):
 
 def receive_file():
     data = s.recv(buf)
-    f = open(data,'wb')
-    data = s.recv(buf)
+    f = open(data.decode("utf-8"),'wb')
+    s.settimeout(4)    
     try:
-        while data:
-            f.write(data)
-            s.settimeout(4)    
+        while True:
             data, address = s.recvfrom(buf)
+            f.write(data)
     except timeout:
         pass
     finally:

@@ -15,12 +15,11 @@ def send_file(message):
 
 def receive_file(data):
     f = open(data,'wb')
-    data,address = s.recvfrom(buf)
+    s.settimeout(4)    
     try:
-        while data:
-            f.write(data)
-            s.settimeout(4)    
+        while True:
             data, address = s.recvfrom(buf)
+            f.write(data)
     except timeout:
         pass
     finally:
@@ -71,7 +70,7 @@ while True:
         if data.decode() == "The file does not exist":
             print("The file does not exist")
         else:
-            receive_file(data)
+            receive_file(data.decode())
     elif "put" in message:
         if exists(get_filename(message)):
             s.sendto(message.encode(), addr)
