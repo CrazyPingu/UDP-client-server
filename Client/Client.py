@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from socket import *
 from os.path import *
 from sys import *
